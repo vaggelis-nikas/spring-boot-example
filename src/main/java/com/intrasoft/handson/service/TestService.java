@@ -15,5 +15,8 @@ public interface TestService {
 
 	Test saveOrUpdate(Test test) throws IntlDataException;
 
+	Test saveOrUpdateAsync(Test test) throws IntlDataException;
+
 	void delete(Integer id) throws IntlDataException;
+
 }

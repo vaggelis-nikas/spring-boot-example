@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -93,6 +94,19 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
+	@Async
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Test saveOrUpdateAsync(Test test) throws IntlDataException {
+
+		log.debug("ENTERED saveOrUpdateAsync [test={}]", test);
+
+		test = this.saveOrUpdate(test);
+
+		log.debug("EXITING saveOrUpdateAsync [test={}]", test);
+		return test;
+	}
+
+	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(final Integer id) throws IntlDataException {
 
@@ -106,4 +120,5 @@ public class TestServiceImpl implements TestService {
 		}
 		log.debug("EXITING delete");
 	}
+
 }
