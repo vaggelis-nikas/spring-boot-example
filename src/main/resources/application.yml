@@ -1,0 +1,66 @@
+#Server details
+server:
+  port: 8181
+
+#Info endpoint
+info:
+  app:
+    name: @project.name@
+    description: @project.description@
+    groupId: @project.groupId@
+    artifactId: @project.artifactId@
+    version: @project.version@
+
+#Logging
+logging:
+  level:
+    org.apache.catalina: warn
+    org.hibernate: warn
+    root: info
+
+    org.springframework: info
+    com.intrasoft: debug
+
+spring:
+  #App Name
+  application:
+    name: spring-boot-example
+
+  #Database
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.70.8.204/l10?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&useSSL=false&rewriteBatchedStatements=true
+    username: l10
+    password: Intralot
+
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idleTimeout: 60000
+      minimumIdle: 2
+      maximumPoolSize: 20
+      connectionTimeout: 1000
+      poolName: MyPoolName
+      hikari.connectionTestQuery: SELECT 1
+      hikari.autoCommit: false
+
+  #JPA
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      javax.persistence.validation.mode: none
+      hibernate.cache.use_second_level_cache: true
+      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+      hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+
+  #Flyway
+  flyway:
+    enabled: true
+    baseline-version: 0
+    baseline-on-migrate: true
+    table: ATS_SCHEMA_VERSION
+    placeholders.schemaTable: ${spring.flyway.table}
+
+  transaction:
+    rollback-on-commit-failure: true
