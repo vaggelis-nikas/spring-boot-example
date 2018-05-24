@@ -1,1 +1,1 @@
-Try Kafka
+Spring Boot example with JPA
