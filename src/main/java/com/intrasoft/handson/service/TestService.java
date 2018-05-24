@@ -11,6 +11,8 @@ public interface TestService {
 
 	Test get(Integer id) throws IntlDataException;
 
+	void count() throws IntlDataException;
+
 	Test saveOrUpdate(Test test) throws IntlDataException;
 
 	void delete(Integer id) throws IntlDataException;

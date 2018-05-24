@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,23 @@ public class TestServiceImpl implements TestService {
 
 		log.debug("EXITING get [test={}]", test);
 		return test;
+	}
+
+	@Override
+	@Scheduled(fixedDelayString = "${count.polling.rate.millis}")
+	public void count() throws IntlDataException {
+
+		log.debug("ENTERED count");
+
+		final long count;
+		try {
+			count = this.testRepository.count();
+		} catch (final DataAccessException e) {
+			final String errorMessage = MessageFormat.format("Error while listing test objects. Error={0}", e.getMessage());
+			throw new IntlDataException(errorMessage, e);
+		}
+
+		log.debug("EXITING count [count={}]", count);
 	}
 
 	@Override

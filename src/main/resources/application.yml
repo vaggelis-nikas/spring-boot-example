@@ -64,3 +64,5 @@ spring:
 
   transaction:
     rollback-on-commit-failure: true
+
+count.polling.rate.millis: 5000
