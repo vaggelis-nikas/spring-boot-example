@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,7 @@ public class Test {
 	private Integer id;
 
 	@Column(name = "NAME")
+	@NotEmpty
 	private String name;
 
 	@Column(name = "DESCRIPTION")

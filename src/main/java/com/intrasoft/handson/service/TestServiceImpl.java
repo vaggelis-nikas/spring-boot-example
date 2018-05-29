@@ -107,7 +107,7 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void delete(final Integer id) throws IntlDataException {
 
 		log.debug("ENTERED delete [id={}]", id);
